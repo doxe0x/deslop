@@ -4,7 +4,7 @@ This file backs the main SKILL.md. Read it when you need the exhaustive lists, t
 
 ## 1. The empirical basis (why these lists exist)
 
-The vocabulary tells are not folklore. They were measured. Kobak, González-Márquez, Horvát, and Lause, "Delving into LLM-assisted writing in biomedical publications through excess vocabulary" (*Science Advances*, 2025), analyzed 15.1 million PubMed abstracts from 2010-2024 using an "excess vocabulary" method. They found a step-function spike in 2024 style words. The largest frequency jumps (2024 frequency vs. the projected counterfactual) were "delves" (about 28x), "underscores" (about 14x), and "showcasing" (about 11x). Unlike earlier vocabulary spikes that were content words (during COVID: "respiratory", "remdesivir"), the 2024 excess was almost entirely style words. At least 13.5% of 2024 abstracts showed LLM fingerprints, rising to around 40% in some subfields. A companion study (Juzek and Ward, "Why Does ChatGPT 'Delve' So Much?") traced the cause to RLHF and human-evaluator feedback, not the training data, which is why the jump looks like "someone pulled a switch."
+The vocabulary tells are not folklore. They were measured. Kobak, González-Márquez, Horvát, and Lause, "Delving into LLM-assisted writing in biomedical publications through excess vocabulary" (*Science Advances*, 2025), analyzed 15.1 million PubMed abstracts from 2010-2024 using an "excess vocabulary" method. They found a step-function spike in 2024 style words. The largest frequency jumps (2024 frequency vs. the projected counterfactual) were "delves" (about 28x), "underscores" (about 14x), and "showcasing" (about 11x). Unlike earlier vocabulary spikes that were content words (during COVID: "respiratory", "remdesivir"), the 2024 excess was almost entirely style words. At least 13.5% of 2024 abstracts showed LLM fingerprints, rising to around 40% in some subfields. A companion study (Juzek and Ward, "Why Does ChatGPT 'Delve' So Much?", COLING 2025) found the pattern is consistent with RLHF and human-evaluator feedback rather than the raw training data, though their results were mixed. Either way, the jump looks like "someone pulled a switch."
 
 The root mechanics, in one paragraph: models predict the most likely next token, so they default to the safe middle of the distribution. RLHF (reinforcement learning from human feedback) then rewards agreeable, positive, balanced answers because annotators prefer them, which amplifies hedging and sycophancy. And alignment training induces "mode collapse" toward typical, familiar phrasings, which is why every output sounds like it came from the same seminar. Understanding this is the point: the tells are symptoms of averaging, so the cure is anything that moves the text off the average (specificity, position, rhythm).
 
@@ -123,13 +123,13 @@ inspirational ending. Make it sound like a smart operator explaining what is act
 ## 7. Sources
 
 Primary research and credible voices, for refreshing the lists later:
-- Kobak et al., "Delving into LLM-assisted writing..." (*Science Advances*, 2025) — the excess-vocabulary study.
-- Juzek & Ward, "Why Does ChatGPT 'Delve' So Much?" — RLHF as the cause.
-- Liang et al., "GPT detectors are biased against non-native English writers" (*Patterns*, 2023) — detector unreliability.
-- Zhang et al., "Verbalized Sampling" (2025) — mode collapse and a generation-time fix (ask for several responses with probabilities, sample the tails).
-- Wikipedia, "Signs of AI writing" — the best community field guide to patterns.
-- Search Engine Journal, "This Writing Style Screams AI" — cadence as the primary tell.
-- Ann Handley, "What AI Would Delete From Great Writing" — voice and "evidence of a mind behind the work".
-- Dragonfly Editorial, "Beyond the Em-Dash Debate" — empty transitions as the real tell.
+- Kobak et al., "Delving into LLM-assisted writing..." (*Science Advances*, 2025): the excess-vocabulary study.
+- Juzek & Ward, "Why Does ChatGPT 'Delve' So Much?" (COLING 2025): RLHF as a likely contributor.
+- Liang et al., "GPT detectors are biased against non-native English writers" (*Patterns*, 2023): detector unreliability.
+- Zhang et al., "Verbalized Sampling" (2025): mode collapse and a generation-time fix (ask for several responses with probabilities, sample the tails).
+- Wikipedia, "Signs of AI writing": the best community field guide to patterns.
+- Search Engine Journal, "This Writing Style Screams AI": cadence as the primary tell.
+- Ann Handley, "What AI Would Delete From Great Writing": voice and "evidence of a mind behind the work".
+- Dragonfly Editorial, "Beyond the Em-Dash Debate": empty transitions as the real tell.
 - Jeff Goins; Sean Kernan ("13 Signs You Used ChatGPT"); Atom Writer (the "statistical average problem").
-- Strunk & White; Gary Provost (sentence-length variation, "write music"); Paul Graham ("Write Like You Talk", "Write Simply") — the pre-AI authorities the whole system rests on.
+- Strunk & White; Gary Provost (sentence-length variation, "write music"); Paul Graham ("Write Like You Talk", "Write Simply"): the pre-AI authorities the whole system rests on.

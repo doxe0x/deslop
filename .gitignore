@@ -1,0 +1,7 @@
+# macOS
+.DS_Store
+
+# bundle extraction artifacts and local renamed copies
+*_unzipped/
+_unzipped/
+deslop.zip
