@@ -1,5 +1,9 @@
 # deslop
 
+<p align="center">
+  <img src="assets/banner.png" alt="deslop" width="100%">
+</p>
+
 A Claude skill that audits and rewrites text so it stops reading like AI.
 
 The idea behind it: AI prose reads as AI because it is statistically average. Safe claims, generic transitions, neat symmetry, no real position, almost no concrete detail. Swapping out words like "delve", "leverage", and "robust" is the smallest lever. The skill works down five layers (vocabulary, filler phrases, structure, rhythm, tone) and pushes for the three things a model cannot fake on its own: specificity, a position the author actually holds, and rhythm.
