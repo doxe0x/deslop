@@ -8,6 +8,8 @@ A Claude skill that audits and rewrites text so it stops reading like AI.
 
 The idea behind it: AI prose reads as AI because it is statistically average. Safe claims, generic transitions, neat symmetry, no real position, almost no concrete detail. Swapping out words like "delve", "leverage", and "robust" is the smallest lever. The skill works down five layers (vocabulary, filler phrases, structure, rhythm, tone) and pushes for the three things a model cannot fake on its own: specificity, a position the author actually holds, and rhythm.
 
+It works in any language, not only English: the structural, rhythm, and tone layers are language-agnostic, and the skill hunts local calques of the same patterns instead of translating the English kill-list word for word. It always answers in the language of the draft.
+
 ## Contents
 
 - `SKILL.md`: the skill itself. It runs in two modes. AUDIT flags what reads as AI and gives a sharper rewrite for each span. REWRITE produces a de-slopped version.
@@ -87,13 +89,19 @@ Never invent specifics. When a draft needs a number, name, or example that the s
 
 ## Rebuilding the bundle
 
-If you edit `SKILL.md` or `references/kill-lists.md`, rebuild `deslop.skill` so it stays in sync with the source. From inside the repo:
+If you edit `SKILL.md` or `references/kill-lists.md`, rebuild `deslop.skill` so it stays in sync with the source. From inside the repo (works no matter what the folder is named):
 
-```
-rm -f deslop.skill
-cd ..
-zip -r deslop/deslop.skill deslop/SKILL.md deslop/references/kill-lists.md
-cd deslop
+```bash
+python3 - <<'PY'
+from pathlib import Path
+from zipfile import ZIP_DEFLATED, ZipFile
+root = Path.cwd()
+out = root / 'deslop.skill'
+with ZipFile(out, 'w', ZIP_DEFLATED) as z:
+    z.write(root / 'SKILL.md', 'deslop/SKILL.md')
+    z.write(root / 'references/kill-lists.md', 'deslop/references/kill-lists.md')
+print(out)
+PY
 ```
 
 Then run `unzip -l deslop.skill` and confirm every path still nests under a top-level `deslop/` folder.
