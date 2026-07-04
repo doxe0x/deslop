@@ -1,6 +1,6 @@
 ---
 name: deslop
-description: Audit and rewrite text so it stops reading like AI. Use this whenever the task involves checking a draft for AI tells, removing AI "slop" from generated text, making writing sound human, editing an article/post/note/email for voice, or writing something new that should not sound machine-generated. Trigger it for any request like "does this sound like AI", "make this less AI", "de-slop this", "humanize this draft", "edit for voice", "rewrite this so it sounds like me", or when producing original prose (posts, articles, analysis) that needs to avoid the generic AI register. Apply it even when the user does not say the word "AI" but is clearly asking for writing to sound sharper, more specific, or more human.
+description: Use when a draft needs checking for AI tells or when writing new prose that must not read as machine-generated — requests like "does this sound like AI", "make this less AI", "de-slop this", "humanize this draft", "edit for voice", "rewrite this so it sounds like me", or any article/post/note/email edit where the user wants writing to sound sharper, more specific, or more human. Apply even when the user never says "AI" but the text reads generic, over-polished, or template-like. Works in any language, not only English.
 ---
 
 # Deslop: making text stop sounding like AI
@@ -62,6 +62,10 @@ Fix by varying sentence length on purpose: drop in a three-word fragment, then l
 - **Too safe.** Hedging away from any sharp claim. "This could potentially create some concerns." → "Users are underwriting the risk, and the docs do not say it plainly."
 - **Too polished.** Perfectly smooth text reads dead. Human text has a short aside, an unexpected example, a stated doubt, a small qualification, normal unevenness.
 - **No mind behind it.** The deepest problem (Ann Handley's point): good writing shows the author saw something, decided something, rejected something, has taste. AI gives competent prose with no judgment in it. If the draft could have been written by anyone about anything, that is the tell.
+
+## Non-English drafts
+
+Layers 2-5 are language-agnostic: the negation frame, metronome triads, uniform cadence, filler transitions, and fake balance appear in every language a model writes, so flag the same patterns whatever the language. Layer 1 lists are English-specific; for other languages, hunt the local calques of the same inflation instead of translating the list word for word (in Ukrainian, for example: "у сучасному цифровому світі", "варто зазначити", "не тільки X, а й Y", "давайте розберемося"). Two hard rules: audit and rewrite in the language of the draft, and never translate the text as a side effect of de-slopping it.
 
 ## What makes text human: the fixes
 
