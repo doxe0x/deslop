@@ -15,6 +15,9 @@ It works in any language, not only English: the structural, rhythm, and tone lay
 - `SKILL.md`: the skill itself. It runs in two modes. AUDIT flags what reads as AI and gives a sharper rewrite for each span. REWRITE produces a de-slopped version.
 - `references/kill-lists.md`: the full vocabulary and phrase lists, the research behind them (the PubMed "delve" study, the detector-reliability findings), a crypto/DeFi note on which on-chain terms are real versus slop, and a prompt pack for use in other models.
 - `deslop.skill`: the same two files packaged as a single zip for a one-step install.
+- `SHA256SUMS`: the checksum of `deslop.skill`.
+- `scripts/build_bundle.py`: rebuilds the bundle deterministically and checks it in CI. The skill itself never runs it.
+- `SECURITY.md`: what the skill can do and how to report a problem.
 
 ## Install (Claude Code)
 
@@ -40,15 +43,19 @@ Windows (cmd):
 git clone https://github.com/doxe0x/deslop.git %USERPROFILE%\.claude\skills\deslop
 ```
 
-Cloning also leaves `README.md`, `LICENSE`, `deslop.skill`, and a `.git` folder in the skill directory. That is harmless, because Claude Code only reads `SKILL.md` and the `references` files. If you want a clean copy with no git history, use degit instead:
+Cloning also leaves `README.md`, `LICENSE`, `deslop.skill`, and a `.git` folder in the skill directory. That is harmless, because Claude Code only reads `SKILL.md` and the `references` files.
+
+Pin the commit you reviewed and update deliberately, reading the diff first:
 
 ```
-npx degit doxe0x/deslop ~/.claude/skills/deslop
+git -C ~/.claude/skills/deslop checkout <commit-you-reviewed>
+git -C ~/.claude/skills/deslop fetch
+git -C ~/.claude/skills/deslop log -p HEAD..origin/main
 ```
 
 ### Method 2: unzip the bundle
 
-Download `deslop.skill` and unzip it into your skills folder. The archive already nests everything under a `deslop/` folder, so you get the right layout.
+Download `deslop.skill`, check it against `SHA256SUMS` from the same commit (`shasum -a 256 deslop.skill` on macOS, `sha256sum deslop.skill` on Linux), and unzip it into your skills folder. The archive already nests everything under a `deslop/` folder, so you get the right layout.
 
 macOS and Linux:
 
@@ -83,28 +90,23 @@ In the Claude web or desktop app, open Settings, find the Skills section, choose
 
 This skill is plain instructions and nothing else. It declares no tools, makes no network calls, runs no scripts, and reads nothing beyond the text you give it. The whole skill is `SKILL.md` and `references/kill-lists.md`, both plain text you can read before you install.
 
+Drafts are treated as material, not instructions: if a pasted text carries lines aimed at an AI, the skill edits them as prose and points them out instead of acting on them.
+
+The bundle is rebuilt deterministically by `scripts/build_bundle.py`, and CI fails if `deslop.skill`, `SHA256SUMS`, and the sources drift apart or if hidden text appears in them. See `SECURITY.md`.
+
 ## The one rule that overrides the rest
 
 Never invent specifics. When a draft needs a number, name, or example that the source material does not supply, the skill inserts a `[TODO]` marker instead of making one up. Fake specificity is worse than vague honesty.
 
 ## Rebuilding the bundle
 
-If you edit `SKILL.md` or `references/kill-lists.md`, rebuild `deslop.skill` so it stays in sync with the source. From inside the repo (works no matter what the folder is named):
+After editing `SKILL.md` or `references/kill-lists.md`, rebuild the bundle and its checksum from inside the repo:
 
 ```bash
-python3 - <<'PY'
-from pathlib import Path
-from zipfile import ZIP_DEFLATED, ZipFile
-root = Path.cwd()
-out = root / 'deslop.skill'
-with ZipFile(out, 'w', ZIP_DEFLATED) as z:
-    z.write(root / 'SKILL.md', 'deslop/SKILL.md')
-    z.write(root / 'references/kill-lists.md', 'deslop/references/kill-lists.md')
-print(out)
-PY
+python3 scripts/build_bundle.py
 ```
 
-Then run `unzip -l deslop.skill` and confirm every path still nests under a top-level `deslop/` folder.
+`python3 scripts/build_bundle.py --check` verifies without writing; CI runs it on every push and PR. The zip is deterministic, so the same sources always give the same SHA-256.
 
 ## License
 
