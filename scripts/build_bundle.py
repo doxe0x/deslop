@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parent.parent
 BUNDLE = ROOT / f"{NAME}.skill"
 SUMS = ROOT / "SHA256SUMS"
 EPOCH = (1980, 1, 1, 0, 0, 0)
-HIDDEN = re.compile("[​-‏‪-‮⁠-⁤﻿\U000e0000-\U000e007f]|<!--")
+HIDDEN = re.compile("[\u200b-\u200f\u202a-\u202e\u2060-\u2064\ufeff\U000e0000-\U000e007f]|<!--")
 
 
 def build() -> bytes:
